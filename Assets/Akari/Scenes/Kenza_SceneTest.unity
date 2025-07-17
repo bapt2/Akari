@@ -1082,8 +1082,8 @@ MonoBehaviour:
   speed: 5
   sprintSpeed: 8
   jumpHeight: 2
-  maxJump: 2
   gravity: -9.81
+  maxJump: 2
 --- !u!114 &1216689886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camTPS: {fileID: 156215906}
   camFPS: {fileID: 789406307}
-  switchBackDelay: 3
+  switchBackDelay: 5
 --- !u!1 &1266427458
 GameObject:
   m_ObjectHideFlags: 0
