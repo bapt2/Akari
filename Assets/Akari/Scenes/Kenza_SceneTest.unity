@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 400508637}
   - component: {fileID: 400508639}
   - component: {fileID: 400508638}
+  - component: {fileID: 400508640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -362,6 +363,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &400508640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400508632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77412f6b7c92b0747a41656e753d128f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 3
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  playerCamera: {fileID: 789406307}
 --- !u!1 &789406304
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,6 +578,7 @@ GameObject:
   - component: {fileID: 1470419510}
   - component: {fileID: 1470419509}
   - component: {fileID: 1470419508}
+  - component: {fileID: 1470419512}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -651,11 +670,24 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.72, y: 0.55, z: 8.19}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.6585, y: 14.55, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1470419512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470419507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe0a28f41a2ac343834864d8714f85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraSwitcher: {fileID: 400508637}
 --- !u!1 &1576122189
 GameObject:
   m_ObjectHideFlags: 0
