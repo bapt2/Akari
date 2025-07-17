@@ -17,13 +17,13 @@ public class CameraSwitcher : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.I))
         {
             SwitchCamera();
         }
     }
 
-    void SwitchCamera()
+     public void SwitchCamera()
     {
         isFPS = !isFPS; //  On inverse bien l’état
 
