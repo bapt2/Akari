@@ -36,7 +36,6 @@ public class CameraSwitcher : MonoBehaviour
             camFPS.Priority = 30;
             camTPS.Priority = 10;
 
-            // Si une coroutine de retour est en cours, on l'arrête
             if (switchBackCoroutine != null)
             {
                 StopCoroutine(switchBackCoroutine);
@@ -48,7 +47,6 @@ public class CameraSwitcher : MonoBehaviour
             camFPS.Priority = 10;
             camTPS.Priority = 30;
 
-            // Lance la coroutine pour revenir automatiquement en FPS après un délai
             if (switchBackCoroutine != null)
                 StopCoroutine(switchBackCoroutine);
 
@@ -66,5 +64,11 @@ public class CameraSwitcher : MonoBehaviour
         }
 
         switchBackCoroutine = null;
+    }
+
+    // Méthode à ajouter pour  appeler appear in tps 
+    public bool IsFPS()
+    {
+        return isFPS;
     }
 }
