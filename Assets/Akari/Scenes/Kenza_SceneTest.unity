@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 156215907}
   - component: {fileID: 156215906}
-  - component: {fileID: 156215908}
   m_Layer: 0
   m_Name: CM-TPSCam
   m_TagString: Untagged
@@ -179,7 +178,7 @@ MonoBehaviour:
       Curvature: {x: 2, y: 11}
       BarrelClipping: 0.25
       Anamorphism: 0
-  BlendHint: 4
+  BlendHint: 0
 --- !u!4 &156215907
 Transform:
   m_ObjectHideFlags: 0
@@ -195,19 +194,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -18.069}
---- !u!114 &156215908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156215905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damping: 0
 --- !u!1 &400508632
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +206,7 @@ GameObject:
   - component: {fileID: 400508636}
   - component: {fileID: 400508635}
   - component: {fileID: 400508634}
+  - component: {fileID: 400508637}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -317,6 +304,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400508632}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &400508637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400508632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17650a70715c5d9409e7bb07ffbce4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camTPS: {fileID: 156215906}
+  camFPS: {fileID: 789406307}
 --- !u!1 &789406304
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +329,6 @@ GameObject:
   - component: {fileID: 789406308}
   - component: {fileID: 789406307}
   - component: {fileID: 789406311}
-  - component: {fileID: 789406312}
   m_Layer: 0
   m_Name: CM_FPSCam
   m_TagString: Untagged
@@ -378,7 +378,7 @@ MonoBehaviour:
       Curvature: {x: 2, y: 11}
       BarrelClipping: 0.25
       Anamorphism: 0
-  BlendHint: 0
+  BlendHint: 4
 --- !u!4 &789406308
 Transform:
   m_ObjectHideFlags: 0
@@ -387,8 +387,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789406304}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.069, y: 0.418, z: 0.4}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 0.431, z: 0.61}
   m_LocalScale: {x: 1, y: 0.23069118, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -407,38 +407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: 0
---- !u!114 &789406312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789406304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowDebugText: 0
-  ShowCameraFrustum: 1
-  IgnoreTimeScale: 0
-  WorldUpOverride: {fileID: 0}
-  ChannelMask: -1
-  UpdateMethod: 2
-  BlendUpdateMethod: 1
-  LensModeOverride:
-    Enabled: 0
-    DefaultMode: 2
-  DefaultBlend:
-    Style: 1
-    Time: 2
-    CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  CustomBlends: {fileID: 0}
 --- !u!1 &1178819751
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +792,7 @@ Transform:
   m_GameObject: {fileID: 2047851093}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.069, y: 2.6819463, z: 0.4}
+  m_LocalPosition: {x: 0.01, y: 2.7382987, z: 0.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

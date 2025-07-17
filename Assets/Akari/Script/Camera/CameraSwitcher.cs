@@ -1,17 +1,18 @@
 using UnityEngine;
-using Unity.Cinemachine;
+using Unity.Cinemachine; 
 
 public class CameraSwitcher : MonoBehaviour
 {
     public CinemachineCamera camTPS;
     public CinemachineCamera camFPS;
 
-    private bool isFPS = false;
+    private bool isFPS = true; // On commence en FPS
 
     void Start()
     {
-        camTPS.Priority = 10;
+        // Caméra FPS active au début
         camFPS.Priority = 30;
+        camTPS.Priority = 10;
     }
 
     void Update()
@@ -24,7 +25,7 @@ public class CameraSwitcher : MonoBehaviour
 
     void SwitchCamera()
     {
-        isFPS = !isFPS;
+        isFPS = !isFPS; //  On inverse bien l’état
 
         if (isFPS)
         {
