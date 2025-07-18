@@ -346,6 +346,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1216689884}
+  - {fileID: 931118397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &431522482
@@ -995,6 +996,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf5ad53d65b459e4a8ae85452c3645af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1216689888}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf5ad53d65b459e4a8ae85452c3645af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1216689889}
   m_SourcePrefab: {fileID: 100100000, guid: cf5ad53d65b459e4a8ae85452c3645af, type: 3}
 --- !u!1 &789406304
 GameObject:
@@ -1199,6 +1203,37 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!1 &931118396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 931118397}
+  m_Layer: 0
+  m_Name: GrabPointTps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &931118397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931118396}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.612, y: -0.386, z: 0.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 231482327}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1077100713 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4601992614122945897, guid: cf5ad53d65b459e4a8ae85452c3645af, type: 3}
@@ -1395,6 +1430,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1216689889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216689880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8801fe6c28339df40b3a3870ee8331b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabPoint: {fileID: 0}
+  grabDistance: 50
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1266427458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,7 +1627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe0a28f41a2ac343834864d8714f85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSwitcher: {fileID: 0}
+  cameraSwitcher: {fileID: 1216689886}
 --- !u!1 &1552480268
 GameObject:
   m_ObjectHideFlags: 0
