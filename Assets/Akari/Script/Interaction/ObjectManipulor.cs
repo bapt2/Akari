@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ObjectManipulor : MonoBehaviour
 {
-    [Header("Grabbing Settings")]
-    public Transform grabPoint; // Point devant la caméra
+    public CameraSwitcher cameraSwitcher;
+    public Transform grabPoint;
     public float grabDistance = 3f;
-    public LayerMask interactableLayer; 
+    public LayerMask interactableLayer;
 
     private GameObject heldObject;
     private Rigidbody heldRb;
@@ -33,7 +33,9 @@ public class ObjectManipulor : MonoBehaviour
 
     void TryGrab()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Camera activeCamera = Camera.main; // suit la Cinemachine active
+        Ray ray = activeCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
         if (Physics.Raycast(ray, out RaycastHit hit, grabDistance, interactableLayer))
         {
             heldObject = hit.collider.gameObject;
@@ -59,9 +61,12 @@ public class ObjectManipulor : MonoBehaviour
 
     void Throw()
     {
+        Camera activeCamera = Camera.main;
+        Vector3 throwDirection = activeCamera.transform.forward;
+
         heldRb.useGravity = true;
         heldRb.freezeRotation = false;
-        heldRb.AddForce(transform.forward * 500f);
+        heldRb.AddForce(throwDirection * 500f);
         heldObject = null;
         heldRb = null;
     }
