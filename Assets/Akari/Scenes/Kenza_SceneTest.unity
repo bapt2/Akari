@@ -346,7 +346,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1216689884}
-  - {fileID: 931118397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &431522482
@@ -362,6 +361,7 @@ GameObject:
   - component: {fileID: 431522486}
   - component: {fileID: 431522485}
   - component: {fileID: 431522489}
+  - component: {fileID: 431522490}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -453,7 +453,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.77, y: 0.5, z: -3.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2.2904, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -485,6 +485,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &431522490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431522482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c9701b869822a43b7db07074aedbfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraSwitcher: {fileID: 1216689886}
 --- !u!1 &585468651
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +996,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cf5ad53d65b459e4a8ae85452c3645af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1266427459}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: cf5ad53d65b459e4a8ae85452c3645af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931118397}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf5ad53d65b459e4a8ae85452c3645af, type: 3}
       insertIndex: -1
@@ -1228,11 +1244,11 @@ Transform:
   m_GameObject: {fileID: 931118396}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.612, y: -0.386, z: 0.91}
+  m_LocalPosition: {x: 0, y: 0.9599999, z: 0.5660001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 231482327}
+  m_Father: {fileID: 1216689884}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1077100713 stripped
 SkinnedMeshRenderer:
@@ -1442,11 +1458,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8801fe6c28339df40b3a3870ee8331b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabPoint: {fileID: 0}
-  grabDistance: 50
+  grabPoint: {fileID: 931118397}
+  grabDistance: 3
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!1 &1266427458
 GameObject:
   m_ObjectHideFlags: 0
