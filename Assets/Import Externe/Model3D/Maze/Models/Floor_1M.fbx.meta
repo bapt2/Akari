@@ -1,11 +1,23 @@
 fileFormatVersion: 2
 guid: b32cdfb827fef7743b387707c1f5bc8b
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302221
+  packageName: Maze Modular Puzzle Kit
+  packageVersion: 1.0
+  assetPath: Assets/Maze/Models/Floor_1M.fbx
+  uploadId: 713915
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ImphenziaPixPal
+    second: {fileID: 2100000, guid: 5b1e6910683bc8a4aaa8682f9bfba2dc, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -105,10 +117,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 302221
-  packageName: Maze Modular Puzzle Kit
-  packageVersion: 1.0
-  assetPath: Assets/Maze/Models/Floor_1M.fbx
-  uploadId: 713915
