@@ -12,7 +12,7 @@ public class ObjectManipulor : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(1))
         {
             if (heldObject == null)
                 TryGrab();

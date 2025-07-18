@@ -1193,6 +1193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404a172cfea057040a1fa3e769576bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSwitcher: {fileID: 1216689886}
   grabPoint: {fileID: 1552480269}
   grabDistance: 3
   interactableLayer:
