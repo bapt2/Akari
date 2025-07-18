@@ -4,19 +4,26 @@ using System.Collections;
 
 public class CameraSwitcher : MonoBehaviour
 {
+    [Header("Cameras")]
     public CinemachineCamera camTPS;
     public CinemachineCamera camFPS;
 
+    [Header("Player Components")]
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
+
+    [Header("Settings")]
+    public float switchBackDelay = 3f;
+
     private bool isFPS = true;
-
     private Coroutine switchBackCoroutine;
-
-    public float switchBackDelay = 3f; // Délai avant retour automatique en FPS
 
     void Start()
     {
         camFPS.Priority = 30;
         camTPS.Priority = 10;
+
+        SetTPSVisuals(false); // FPS par défaut
     }
 
     void Update()
@@ -36,6 +43,8 @@ public class CameraSwitcher : MonoBehaviour
             camFPS.Priority = 30;
             camTPS.Priority = 10;
 
+            SetTPSVisuals(false);
+
             if (switchBackCoroutine != null)
             {
                 StopCoroutine(switchBackCoroutine);
@@ -46,6 +55,8 @@ public class CameraSwitcher : MonoBehaviour
         {
             camFPS.Priority = 10;
             camTPS.Priority = 30;
+
+            SetTPSVisuals(true);
 
             if (switchBackCoroutine != null)
                 StopCoroutine(switchBackCoroutine);
@@ -66,7 +77,15 @@ public class CameraSwitcher : MonoBehaviour
         switchBackCoroutine = null;
     }
 
-    // Méthode à ajouter pour  appeler appear in tps 
+    private void SetTPSVisuals(bool enable)
+    {
+        if (playerAnimator != null)
+            playerAnimator.enabled = enable;
+
+        if (playerMeshRenderer != null)
+            playerMeshRenderer.enabled = enable;
+    }
+
     public bool IsFPS()
     {
         return isFPS;
