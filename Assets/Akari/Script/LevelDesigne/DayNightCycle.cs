@@ -71,25 +71,17 @@ public class DayNightCycle : MonoBehaviour
         }
     }
 
-    public void Day()
-    {
-        if (sunLight.intensity < 1.5f)
-            sunLight.intensity += 0.01f;
-    }
-
-    public void Night()
-    {
-        if (sunLight.intensity > 0)
-            sunLight.intensity -= 0.01f;
-    }
-
-
     public IEnumerator SmoothTransition(Material skybox, Light light, float intensityMultiplier)
     {
-        Debug.Log("test de passage");
         inTransition = true;
+
         while (speedTime < 1f)
         {
+            if (isDay)
+                Day();
+            else if (isNight)
+                Night();
+
             speedTime += Time.deltaTime * sensitivity;
             speedTime = Mathf.Clamp01(speedTime);
             speedTime = Mathf.SmoothStep(0f, 1f, speedTime);
@@ -115,5 +107,17 @@ public class DayNightCycle : MonoBehaviour
             dayTransitionDone = true;
             nightTransitionDone = false;
         }
+    }
+
+    public void Day()
+    {
+        if (sunLight.intensity < 1.5f)
+            sunLight.intensity += 0.05f;
+    }
+
+    public void Night()
+    {
+        if (sunLight.intensity > 0)
+            sunLight.intensity -= 0.5f;
     }
 }
