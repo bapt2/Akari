@@ -391,7 +391,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.77, y: 1, z: -3.4}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -584,6 +584,7 @@ MonoBehaviour:
   interactableLayer:
     serializedVersion: 2
     m_Bits: 8
+  scaleMultiplier: 2
 --- !u!1 &1178819751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1055,10 @@ PrefabInstance:
       propertyPath: cameraSwitcher
       value: 
       objectReference: {fileID: 1216689886}
+    - target: {fileID: 2172439513772150503, guid: 150531237e923ea41ac3c41f50bd15f1, type: 3}
+      propertyPath: fpsScaleMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3721619831714798798, guid: 150531237e923ea41ac3c41f50bd15f1, type: 3}
       propertyPath: m_Name
       value: Player

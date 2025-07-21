@@ -2,17 +2,25 @@ using UnityEngine;
 
 public class ObjectManipulor : MonoBehaviour
 {
-    public CameraSwitcher cameraSwitcher;
-    public Transform grabPoint;
+    [Header("References")]
+    public CameraSwitcher cameraSwitcher;   // Pour savoir si on est en FPS
+    public Transform grabPoint;             // Position où l'objet est tenu
     public float grabDistance = 3f;
     public LayerMask interactableLayer;
 
+    [Header("Scale Settings")]
+    public float scaleMultiplier = 1f;      // Taille à appliquer quand on grab en FPS
+
     private GameObject heldObject;
     private Rigidbody heldRb;
-    private Vector3 initialScale; // pour mémoriser la taille d'origine
+
+    private Vector3 originalScale;          // Pour stocker l'échelle de base
+    private Vector3 grabbedScale;           // Échelle une fois doublée
+    private bool hasBeenScaled = false;     // Empêche de redoubler la taille
 
     void Update()
     {
+        // Clic droit pour grab/drop
         if (Input.GetMouseButtonDown(1))
         {
             if (heldObject == null)
@@ -21,12 +29,13 @@ public class ObjectManipulor : MonoBehaviour
                 Drop();
         }
 
+        // Déplace l'objet avec le point de grab
         if (heldObject != null)
         {
-            // Positionne l'objet sur le grabPoint en bougeant son Rigidbody
             heldRb.MovePosition(grabPoint.position);
         }
 
+        // Clic gauche pour lancer
         if (Input.GetMouseButtonDown(0) && heldObject != null)
         {
             Throw();
@@ -35,7 +44,7 @@ public class ObjectManipulor : MonoBehaviour
 
     void TryGrab()
     {
-        Camera activeCamera = Camera.main; // utilise la caméra active (Cinemachine ou autre)
+        Camera activeCamera = Camera.main;
         Ray ray = activeCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         if (Physics.Raycast(ray, out RaycastHit hit, grabDistance, interactableLayer))
@@ -47,25 +56,14 @@ public class ObjectManipulor : MonoBehaviour
             {
                 heldRb.useGravity = false;
                 heldRb.freezeRotation = true;
-                heldRb.isKinematic = true;
 
-                // Parent l'objet au grabPoint pour qu'il suive la main/caméra
-                heldObject.transform.SetParent(grabPoint);
-                heldObject.transform.localPosition = Vector3.zero;
-                heldObject.transform.localRotation = Quaternion.identity;
-
-                // Mémorise la taille d'origine
-                initialScale = heldObject.transform.localScale;
-
-                // Double la taille si on est en FPS
-                if (cameraSwitcher != null && cameraSwitcher.IsFPS())
+                // Applique la scale uniquement si on est en FPS et pas encore agrandi
+                if (cameraSwitcher != null && cameraSwitcher.IsFPS() && !hasBeenScaled)
                 {
-                    heldObject.transform.localScale = initialScale * 2f;
-                }
-                else
-                {
-                    // Sinon garde la taille normale
-                    heldObject.transform.localScale = initialScale;
+                    originalScale = heldObject.transform.localScale;
+                    grabbedScale = originalScale * scaleMultiplier;
+                    heldObject.transform.localScale = grabbedScale;
+                    hasBeenScaled = true;
                 }
             }
         }
@@ -75,13 +73,11 @@ public class ObjectManipulor : MonoBehaviour
     {
         if (heldRb != null)
         {
-            // Remet la taille d'origine
-            heldObject.transform.localScale = initialScale;
-
-            // Détache l'objet
             heldObject.transform.SetParent(null);
 
-            heldRb.isKinematic = false;
+            // On garde la taille doublée
+            heldObject.transform.localScale = hasBeenScaled ? grabbedScale : originalScale;
+
             heldRb.useGravity = true;
             heldRb.freezeRotation = false;
         }
@@ -92,23 +88,18 @@ public class ObjectManipulor : MonoBehaviour
 
     void Throw()
     {
-        if (heldRb != null)
-        {
-            // Remet la taille d'origine
-            heldObject.transform.localScale = initialScale;
+        Camera activeCamera = Camera.main;
+        Vector3 throwDirection = activeCamera.transform.forward;
 
-            heldObject.transform.SetParent(null);
+        // Toujours garder la scale après le lancer
+        if (heldObject != null)
+            heldObject.transform.localScale = hasBeenScaled ? grabbedScale : originalScale;
 
-            heldRb.isKinematic = false;
-            heldRb.useGravity = true;
-            heldRb.freezeRotation = false;
+        heldRb.useGravity = true;
+        heldRb.freezeRotation = false;
+        heldRb.AddForce(throwDirection * 500f);
 
-            Camera activeCamera = Camera.main;
-            Vector3 throwDirection = activeCamera.transform.forward;
-
-            heldRb.AddForce(throwDirection * 500f);
-        }
-
+        heldObject.transform.SetParent(null);
         heldObject = null;
         heldRb = null;
     }
