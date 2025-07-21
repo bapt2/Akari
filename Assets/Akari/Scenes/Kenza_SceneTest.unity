@@ -1357,6 +1357,10 @@ PrefabInstance:
       propertyPath: camTPS
       value: 
       objectReference: {fileID: 156215906}
+    - target: {fileID: 9026798219259950846, guid: 150531237e923ea41ac3c41f50bd15f1, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1216689884}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

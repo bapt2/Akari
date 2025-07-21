@@ -9,6 +9,7 @@ public class CameraSwitcher : MonoBehaviour
     public CinemachineCamera camFPS;
 
     [Header("Player Components")]
+    [SerializeField] private Transform player; // Le joueur
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
 
@@ -45,6 +46,9 @@ public class CameraSwitcher : MonoBehaviour
 
             SetTPSVisuals(false);
 
+            // Réaligne le joueur sur la direction de la caméra FPS
+            AlignPlayerWithCamera(camFPS);
+
             if (switchBackCoroutine != null)
             {
                 StopCoroutine(switchBackCoroutine);
@@ -63,6 +67,18 @@ public class CameraSwitcher : MonoBehaviour
 
             switchBackCoroutine = StartCoroutine(ReturnToFPSAfterDelay());
         }
+    }
+
+    private void AlignPlayerWithCamera(CinemachineCamera camera)
+    {
+        if (player == null || camera == null) return;
+
+        // On récupère la direction "forward" de la caméra
+        Vector3 lookDir = camera.transform.forward;
+        lookDir.y = 0; // On garde le joueur droit sur l'axe Y
+
+        if (lookDir.sqrMagnitude > 0.001f)
+            player.rotation = Quaternion.LookRotation(lookDir);
     }
 
     private IEnumerator ReturnToFPSAfterDelay()
