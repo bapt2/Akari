@@ -16,7 +16,7 @@ public class CameraSwitcher : MonoBehaviour
     [Header("Settings")]
     public float switchBackDelay = 3f;
 
-    private bool isFPS = true;
+    public bool isFPS = true;
     private Coroutine switchBackCoroutine;
 
     void Start()

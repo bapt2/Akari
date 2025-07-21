@@ -2,39 +2,38 @@ using UnityEngine;
 
 public class SwitchLayer : MonoBehaviour
 {
-    public GameObject objectToChangeLayer;
+    public static SwitchLayer instance;
 
-    public LayerMask defaultLayer;
-    public LayerMask xRayLayer;
-
-    [Header("Debug")]
-    public bool xRayActive;
-
-    //Change le layerMask actif sur l'objet
-    //Active le XRay
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        xRayActive = !xRayActive;
-        int layerNum = (int)Mathf.Log(xRayLayer.value, 2);
-        objectToChangeLayer.layer = layerNum;
-
-        if (objectToChangeLayer.transform.childCount > 0)
+        if (instance != null)
         {
-            SetLayerAllChildren(objectToChangeLayer.transform, layerNum);
+            Debug.LogWarning($"Plus d'une instance de {this} dans la scene");
+            Destroy(gameObject);
+            return;
         }
 
+        instance = this;
     }
 
-     //Désactive le XRay
-    private void OnTriggerExit(Collider other)
-    {
-        xRayActive = !xRayActive;
-        int layerNum = (int)Mathf.Log(defaultLayer.value, 2);
-        objectToChangeLayer.layer = layerNum;
 
-        if (objectToChangeLayer.transform.childCount > 0)
+    public void ChangeLayer(GameObject gameObject, LayerMask layerMask, bool hasChildren = false)
+    {
+        int layerNum = (int)Mathf.Log(layerMask.value, 2);
+        gameObject.layer = layerNum;
+
+        if (hasChildren)
         {
-            SetLayerAllChildren(objectToChangeLayer.transform, layerNum);
+            SetLayerAllChildren(gameObject.transform, layerNum);
+        }
+    }
+
+    public void ChangeLayers(GameObject[] gameObjects, LayerMask layerMask)
+    {
+        int layerNum = (int)Mathf.Log(layerMask.value, 2);
+        foreach (GameObject obj in gameObjects)
+        {
+            obj.layer = layerNum;
         }
     }
 
