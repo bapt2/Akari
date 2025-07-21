@@ -131,27 +131,14 @@ GameObject:
   - component: {fileID: 56489056}
   - component: {fileID: 56489055}
   - component: {fileID: 56489054}
-  - component: {fileID: 56489053}
-  m_Layer: 0
+  - component: {fileID: 56489058}
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &56489053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56489052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c9701b869822a43b7db07074aedbfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraSwitcher: {fileID: 0}
 --- !u!135 &56489054
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -241,6 +228,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &56489058
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56489052}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0
 --- !u!1 &156215905
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +343,7 @@ GameObject:
   - component: {fileID: 431522486}
   - component: {fileID: 431522485}
   - component: {fileID: 431522489}
-  - component: {fileID: 431522490}
+  - component: {fileID: 431522491}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -420,8 +434,8 @@ Transform:
   m_GameObject: {fileID: 431522482}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.77, y: 0.5, z: -3.4}
-  m_LocalScale: {x: 1, y: 2.2904, z: 1}
+  m_LocalPosition: {x: 11.77, y: 1, z: -3.4}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -453,7 +467,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &431522490
+--- !u!114 &431522491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -462,10 +476,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 431522482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c9701b869822a43b7db07074aedbfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fa1d0456ed8fb247b8ac058f1361023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSwitcher: {fileID: 1216689886}
+  unlocked: 0
 --- !u!1 &585468651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1057,7 @@ Transform:
   m_GameObject: {fileID: 1552480268}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.18488264, y: -0.517, z: 0.1712}
+  m_LocalPosition: {x: -0.18488264, y: -0.517, z: 0.324}
   m_LocalScale: {x: 1, y: 1, z: 0.124109514}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1274,6 +1289,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2172439513772150503, guid: 150531237e923ea41ac3c41f50bd15f1, type: 3}
+      propertyPath: cameraSwitcher
+      value: 
+      objectReference: {fileID: 1216689886}
+    - target: {fileID: 2172439513772150503, guid: 150531237e923ea41ac3c41f50bd15f1, type: 3}
+      propertyPath: fpsScaleMultiplier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093830208190076511, guid: 150531237e923ea41ac3c41f50bd15f1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.719
+      objectReference: {fileID: 0}
     - target: {fileID: 3721619831714798798, guid: 150531237e923ea41ac3c41f50bd15f1, type: 3}
       propertyPath: m_Name
       value: Player

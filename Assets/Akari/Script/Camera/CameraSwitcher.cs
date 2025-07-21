@@ -90,4 +90,9 @@ public class CameraSwitcher : MonoBehaviour
     {
         return isFPS;
     }
+
+    public bool IsTPS()
+    {
+        return !isFPS;
+    }
 }
