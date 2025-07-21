@@ -5282,6 +5282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 474838988}
   - component: {fileID: 474838987}
+  - component: {fileID: 474838989}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5318,6 +5319,18 @@ Transform:
   - {fileID: 38564059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &474838989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474838986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1f80e1a7f711e4c90356b2ffad8e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &492696031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8599673555754637904, guid: 5a1b1bec0f03d1348a3ae23ffaecb6a2, type: 3}
@@ -10217,6 +10230,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8707906396573347903, guid: 0e4e3a4979369ee488b4457c5a511a96, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 127
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10998,6 +11015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1026521862}
+  - component: {fileID: 1026521863}
   m_Layer: 0
   m_Name: Jump1
   m_TagString: Untagged
@@ -11024,6 +11042,31 @@ Transform:
   - {fileID: 806034690}
   m_Father: {fileID: 786891740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1026521863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026521861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c266cdcafdfce446bd74e9154b6221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasChange: 0
+  gameObjectsToChangeLayer:
+  - {fileID: 1436850085}
+  - {fileID: 1129033164}
+  - {fileID: 1663500118}
+  - {fileID: 806034689}
+  visibleInTPS:
+    serializedVersion: 2
+    m_Bits: 128
+  defaultLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  cameraSwitcher: {fileID: 1592997282}
 --- !u!1001 &1031879634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14930,17 +14973,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1463884917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc1f80e1a7f711e4c90356b2ffad8e7f, type: 3}
+  m_Script: {fileID: 11500000, guid: f36935a3e5be7a443bfcb8a0d77e4a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasChildren: 0
   objectToChangeLayer: {fileID: 1520830795}
   defaultLayer:
     serializedVersion: 2
     m_Bits: 1
-  xRayLayer:
+  layerToChange:
     serializedVersion: 2
     m_Bits: 64
-  xRayActive: 0
 --- !u!1001 &1465998758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15873,6 +15916,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5974556578624857757, guid: 8fd884f4ad6527445b6720956ac0735e, type: 3}
   m_PrefabInstance: {fileID: 1439834250}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1592997282 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7984968111101068600, guid: 8fd884f4ad6527445b6720956ac0735e, type: 3}
+  m_PrefabInstance: {fileID: 1439834250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592997279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17650a70715c5d9409e7bb07ffbce4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1599931945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15945,80 +15999,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 689123046}
   m_SourcePrefab: {fileID: 100100000, guid: 453d762048f90974c8a7164f9efc863e, type: 3}
---- !u!1 &1612744579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1612744582}
-  - component: {fileID: 1612744581}
-  - component: {fileID: 1612744580}
-  m_Layer: 0
-  m_Name: XRay Trigger (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1612744580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612744579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc1f80e1a7f711e4c90356b2ffad8e7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToChangeLayer: {fileID: 1520830795}
-  defaultLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  xRayLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  xRayActive: 0
---- !u!65 &1612744581
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612744579}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.323206, y: 0.463776, z: 1.214673}
-  m_Center: {x: 0.032839775, y: -0.26811194, z: -0.40178823}
---- !u!4 &1612744582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612744579}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.72, y: 0.83, z: 19.72}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1614763708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21047,7 +21027,6 @@ SceneRoots:
   - {fileID: 376179422}
   - {fileID: 1835822427}
   - {fileID: 1463884919}
-  - {fileID: 1612744582}
   - {fileID: 18219966}
   - {fileID: 795803321}
   - {fileID: 2007581349}

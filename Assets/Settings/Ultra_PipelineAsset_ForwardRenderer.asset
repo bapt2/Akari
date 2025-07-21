@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   settings:
-    passTag: RenderObjects
+    passTag: VisibleInTPS
     Event: 300
     filterSettings:
       RenderQueueType: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 128
       PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 7fd53655777247849ab6d19f31ce4bdc, type: 2}
+    overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
     overrideShader: {fileID: 0}
     overrideShaderPassIndex: 0
