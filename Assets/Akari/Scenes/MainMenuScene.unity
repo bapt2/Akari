@@ -881,7 +881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Move with WASD or Fleches\n\nE to Interact FPS move\n\nRight Click to
+  m_text: "Move with WASD or Fleches\n\nE to Interact FPS mode\n\nRight Click to
     Grab an Object\n \nleft Click to Drop Object \n\nShfit to Run\n \nH to Interact
     TPS mode"
   m_isRightToLeft: 0
@@ -1597,7 +1597,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -194}
+  m_AnchoredPosition: {x: 0, y: -66}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1371387211
