@@ -13,48 +13,35 @@ public class InteractionSwitch : MonoBehaviour, IInteractable
     public Vector3 newPosition;
     public GameObject door;
 
-    [SerializeField]
-    BoxCollider objectToDesactivate;
-
-    GameObject player;
+    [SerializeField] BoxCollider objectToDesactivate;
+    [SerializeField] GameObject player;
 
     public void Interact()
     {
         Debug.Log("Test de passage");
         if (!trueLever)
         {
+            CharacterController playerControler = player.gameObject.GetComponentInChildren<CharacterController>();
+
+            playerControler.enabled = false;
             player.transform.position = newPosition;
+            playerControler.enabled = true;
+
         }
         else
         {
-            OpenDoor();
+            StartCoroutine(GameManager.instance.OpenDoor(door, lerpTime, lerpValue, speed, startYDoor, objectToDesactivate));
         }
     }
 
     private void Update()
     {
         // pour tester la fonctionnalité plus facilement
-        if (Input.GetKeyDown(KeyCode.E) && door != null)
-        {
-            StartCoroutine(OpenDoor());
-        }
+        //if (Input.GetKeyDown(KeyCode.E) && door != null)
+        //{
+        //    StartCoroutine(OpenDoor());
+        //}
     }
 
-    IEnumerator OpenDoor()
-    {
-        if (objectToDesactivate != null)
-        {
-            objectToDesactivate.enabled = false;
-        }
 
-        while (lerpTime < 1f) 
-        {
-            // faire monter la grille de la porte de manière fluide
-            lerpTime += Time.deltaTime * speed;
-            lerpTime = Mathf.Clamp01(lerpTime);
-            lerpValue = Mathf.Lerp(startYDoor, 5.5f, lerpTime);
-            door.transform.localPosition = new Vector3(-1.5f, lerpValue, 0f);
-            yield return null;
-        }
-    }
 }
