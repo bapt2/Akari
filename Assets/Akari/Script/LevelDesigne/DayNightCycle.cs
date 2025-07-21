@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using TMPro;
 
 
 public class DayNightCycle : MonoBehaviour
@@ -57,6 +56,7 @@ public class DayNightCycle : MonoBehaviour
         {
             if (isNight)
             {
+                StartCoroutine(AudioManager.instance.SmoothMusicTransition(AudioManager.instance.dayMusic, AudioManager.instance.dayMusicMixer));
                 isNight = false;
                 isDay = true;
                 nightCount += 1;
@@ -64,6 +64,7 @@ public class DayNightCycle : MonoBehaviour
             }
             if (isDay)
             {
+                StartCoroutine(AudioManager.instance.SmoothMusicTransition(AudioManager.instance.nightMusic, AudioManager.instance.nightMusicMixer));
                 isDay = false;
                 isNight = true;
                 dayCount += 1;
@@ -75,6 +76,7 @@ public class DayNightCycle : MonoBehaviour
     {
         inTransition = true;
 
+
         while (speedTime < 1f)
         {
             if (isDay)
@@ -85,12 +87,9 @@ public class DayNightCycle : MonoBehaviour
             speedTime += Time.deltaTime * sensitivity;
             speedTime = Mathf.Clamp01(speedTime);
             speedTime = Mathf.SmoothStep(0f, 1f, speedTime);
-
-            //faire une interpolation des couleurs
+            Debug.Log($"skybox: {skybox.name}");
             RenderSettings.skybox.Lerp(RenderSettings.skybox, skybox, speedTime);
-            //faire une transition entre le soleil et la lune
             RenderSettings.sun = light;
-            // faire une transition entre le précedent intensityMultiplier et le nouveau
             RenderSettings.ambientIntensity = Mathf.Lerp(RenderSettings.ambientIntensity, intensityMultiplier, speedTime);
             yield return null;
         }
