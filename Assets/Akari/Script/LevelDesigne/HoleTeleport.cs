@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class HoleTeleport : MonoBehaviour
 {
     public Vector3 newPosition;
-    public Transform player;
+    Transform player;
 
 
     private void OnTriggerEnter(Collider other)
