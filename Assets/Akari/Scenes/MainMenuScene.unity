@@ -883,7 +883,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Move with WASD or Fleches\n\nE to Interact FPS mode\n\nRight Click to
     Grab an Object\n \nleft Click to Drop Object \n\nShfit to Run\n \nH to Interact
-    TPS mode"
+    TPS mode\n\nSpace to Jump"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8209dc395f14e6f41ba56a28ca064d7d, type: 2}
   m_sharedMaterial: {fileID: 5820662345969351275, guid: 8209dc395f14e6f41ba56a28ca064d7d, type: 2}
@@ -979,7 +979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &642759370
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1785,7 +1785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1278931150
 RectTransform:
   m_ObjectHideFlags: 0
