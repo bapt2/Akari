@@ -24,9 +24,8 @@ public class CameraSwitcher : MonoBehaviour
 
     void Start()
     {
-        camFPS.Priority = 30;
-        camTPS.Priority = 10;
         fpsPanTilt = camFPS.GetComponent<CinemachinePanTilt>();
+        InitializeFPSCamera();
         SetTPSVisuals(false); // Démarrage en FPS
     }
 
@@ -44,22 +43,7 @@ public class CameraSwitcher : MonoBehaviour
 
         if (isFPS)
         {
-            
-            camFPS.Priority = 30;
-            camTPS.Priority = 10;
-            // Get direction from camera to target
-            Vector3 direction = player.forward;
-    
-            // Calculate pan (Y rotation) - horizontal angle
-            float pan = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-    
-            // Calculate tilt (X rotation) - vertical angle
-            float horizontalDistance = new Vector2(direction.x, direction.z).magnitude;
-            float tilt = -Mathf.Atan2(direction.y, horizontalDistance) * Mathf.Rad2Deg;
-            
-            fpsPanTilt.TiltAxis.Value = tilt;
-            fpsPanTilt.PanAxis.Value = pan;
-            fpsPanTilt.enabled = true;
+            InitializeFPSCamera();
 
             SetTPSVisuals(false);
 
@@ -83,6 +67,25 @@ public class CameraSwitcher : MonoBehaviour
 
             switchBackCoroutine = StartCoroutine(ReturnToFPSAfterDelay());
         }
+    }
+
+    public void InitializeFPSCamera()
+    {
+        camFPS.Priority = 30;
+        camTPS.Priority = 10;
+        // Get direction from camera to target
+        Vector3 direction = player.forward;
+
+        // Calculate pan (Y rotation) - horizontal angle
+        float pan = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+
+        // Calculate tilt (X rotation) - vertical angle
+        float horizontalDistance = new Vector2(direction.x, direction.z).magnitude;
+        float tilt = -Mathf.Atan2(direction.y, horizontalDistance) * Mathf.Rad2Deg;
+
+        fpsPanTilt.TiltAxis.Value = tilt;
+        fpsPanTilt.PanAxis.Value = pan;
+        fpsPanTilt.enabled = true;
     }
 
 
