@@ -24,7 +24,7 @@ public class SimplePlayerMouvement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 10f;
 
     [Header("Camera")]
-    [SerializeField] private Transform cameraPivot; 
+    [SerializeField] private Transform cameraPivot; // FPS camera pivot
     [SerializeField] private CameraSwitcher cameraSwitcher;
 
     void Start()
@@ -33,26 +33,26 @@ public class SimplePlayerMouvement : MonoBehaviour
         animator = GetComponent<Animator>();
         currentSpeed = walkSpeed;
 
-        // Aligne le joueur au démarrage pour éviter inversion initiale
+        // Aligne le joueur sur la caméra au lancement
         if (cameraSwitcher != null && cameraSwitcher.IsFPS())
         {
-            Vector3 forward = cameraPivot.forward;
-            forward.y = 0;
-            if (forward.sqrMagnitude > 0.001f)
-                transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
+            AlignPlayerWithCamera();
         }
     }
 
     void Update()
     {
+        // Vérifie si le joueur est au sol
         isGrounded = controller.isGrounded;
         if (isGrounded) jumpCount = 0;
 
+        // Détection de l'atterrissage
         if (isGrounded && !wasGroundedLastFrame)
         {
             animator.SetBool("isJumping", false);
         }
 
+        // Entrées du joueur
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
@@ -60,6 +60,7 @@ public class SimplePlayerMouvement : MonoBehaviour
 
         if (cameraSwitcher != null && cameraSwitcher.IsFPS())
         {
+            // Mouvement basé sur la direction de la caméra FPS
             Vector3 forward = cameraPivot.forward;
             Vector3 right = cameraPivot.right;
 
@@ -70,31 +71,36 @@ public class SimplePlayerMouvement : MonoBehaviour
         }
         else
         {
+            // Mouvement classique TPS
             move = new Vector3(moveX, 0, moveZ);
             if (move.magnitude > 1f) move.Normalize();
         }
 
+        // Sprint
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
         currentSpeed = isSprinting ? runSpeed : walkSpeed;
 
-        float speedValue = move.magnitude * currentSpeed;
-
+        // Animation (uniquement en TPS)
         if (!cameraSwitcher.IsFPS())
         {
+            float speedValue = move.magnitude * currentSpeed;
             animator.SetBool("isMoving", move.magnitude > 0.1f);
             animator.SetFloat("moveSpeed", speedValue);
             animator.SetFloat("x", moveX);
             animator.SetFloat("z", moveZ);
         }
 
+        // Rotation joueur (TPS uniquement)
         if (!cameraSwitcher.IsFPS() && move.magnitude > 0.1f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
 
+        // Déplacement horizontal
         controller.Move(move * currentSpeed * Time.deltaTime);
 
+        // Saut
         if (Input.GetButtonDown("Jump") && jumpCount < maxJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -107,9 +113,21 @@ public class SimplePlayerMouvement : MonoBehaviour
             }
         }
 
+        // Gravité
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
         wasGroundedLastFrame = isGrounded;
+    }
+
+    // Aligne le joueur sur la direction de la caméra FPS
+    public void AlignPlayerWithCamera()
+    {
+        if (cameraPivot == null) return;
+
+        Vector3 camForward = cameraPivot.forward;
+        camForward.y = 0;
+        if (camForward.sqrMagnitude > 0.001f)
+            transform.rotation = Quaternion.LookRotation(camForward);
     }
 }

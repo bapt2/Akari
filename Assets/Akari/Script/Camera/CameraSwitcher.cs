@@ -9,7 +9,7 @@ public class CameraSwitcher : MonoBehaviour
     public CinemachineCamera camFPS;
 
     [Header("Player Components")]
-    [SerializeField] private Transform player; 
+    [SerializeField] private SimplePlayerMouvement playerMovement; // Script mouvement
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
 
@@ -21,14 +21,16 @@ public class CameraSwitcher : MonoBehaviour
 
     void Start()
     {
-        // On démarre en FPS par défaut
         camFPS.Priority = 30;
         camTPS.Priority = 10;
 
-        SetTPSVisuals(false);
+        SetTPSVisuals(false); // FPS par défaut
 
-        // Aligne le joueur dès le départ pour éviter l'inversion
-        AlignPlayerWithCamera(camFPS);
+        // Aligne le joueur au démarrage
+        if (playerMovement != null && isFPS)
+        {
+            playerMovement.AlignPlayerWithCamera();
+        }
     }
 
     void Update()
@@ -50,7 +52,9 @@ public class CameraSwitcher : MonoBehaviour
 
             SetTPSVisuals(false);
 
-            AlignPlayerWithCamera(camFPS); // Aligne le joueur
+            // Réaligne le joueur sur la caméra FPS
+            if (playerMovement != null)
+                playerMovement.AlignPlayerWithCamera();
 
             if (switchBackCoroutine != null)
             {
@@ -69,21 +73,6 @@ public class CameraSwitcher : MonoBehaviour
                 StopCoroutine(switchBackCoroutine);
 
             switchBackCoroutine = StartCoroutine(ReturnToFPSAfterDelay());
-        }
-    }
-
-    private void AlignPlayerWithCamera(CinemachineCamera camera)
-    {
-        if (player == null || camera == null) return;
-
-        // Utilise uniquement l'axe Y de la caméra (pas de pitch/roll)
-        Vector3 camForward = camera.transform.forward;
-        camForward.y = 0;
-
-        if (camForward.sqrMagnitude > 0.001f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(camForward, Vector3.up);
-            player.rotation = targetRotation;
         }
     }
 
@@ -108,13 +97,6 @@ public class CameraSwitcher : MonoBehaviour
             playerMeshRenderer.enabled = enable;
     }
 
-    public bool IsFPS()
-    {
-        return isFPS;
-    }
-
-    public bool IsTPS()
-    {
-        return !isFPS;
-    }
+    public bool IsFPS() => isFPS;
+    public bool IsTPS() => !isFPS;
 }
