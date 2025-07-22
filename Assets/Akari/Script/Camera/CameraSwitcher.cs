@@ -9,7 +9,7 @@ public class CameraSwitcher : MonoBehaviour
     public CinemachineCamera camFPS;
 
     [Header("Player Components")]
-    [SerializeField] private SimplePlayerMouvement playerMovement; // Script mouvement
+    [SerializeField] private Transform player;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
 
@@ -23,14 +23,7 @@ public class CameraSwitcher : MonoBehaviour
     {
         camFPS.Priority = 30;
         camTPS.Priority = 10;
-
-        SetTPSVisuals(false); // FPS par défaut
-
-        // Aligne le joueur au démarrage
-        if (playerMovement != null && isFPS)
-        {
-            playerMovement.AlignPlayerWithCamera();
-        }
+        SetTPSVisuals(false); // Démarrage en FPS
     }
 
     void Update()
@@ -52,9 +45,8 @@ public class CameraSwitcher : MonoBehaviour
 
             SetTPSVisuals(false);
 
-            // Réaligne le joueur sur la caméra FPS
-            if (playerMovement != null)
-                playerMovement.AlignPlayerWithCamera();
+            // Réaligne le joueur correctement
+            AlignPlayerWithCamera(camFPS);
 
             if (switchBackCoroutine != null)
             {
@@ -75,6 +67,28 @@ public class CameraSwitcher : MonoBehaviour
             switchBackCoroutine = StartCoroutine(ReturnToFPSAfterDelay());
         }
     }
+
+    private void AlignPlayerWithCamera(CinemachineCamera camera)
+{
+    if (player == null || camera == null) return;
+
+    Vector3 camForward = camera.transform.forward;
+    camForward.y = 0;
+
+    Debug.DrawRay(player.position, player.forward * 2, Color.blue, 2f); // Player forward
+    Debug.DrawRay(player.position, camForward * 2, Color.red, 2f); // Camera forward (sans y)
+
+    if (Vector3.Dot(player.forward, camForward) < 0f)
+    {
+        camForward = -camForward;
+    }
+
+    if (camForward.sqrMagnitude > 0.001f)
+    {
+        player.rotation = Quaternion.LookRotation(camForward);
+        Debug.Log($"Player rotation alignée sur caméra: {camForward}");
+    }
+}
 
     private IEnumerator ReturnToFPSAfterDelay()
     {
