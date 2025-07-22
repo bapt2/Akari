@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Unity.Cinemachine;
 using System.Collections;
@@ -7,6 +8,8 @@ public class CameraSwitcher : MonoBehaviour
     [Header("Cameras")]
     public CinemachineCamera camTPS;
     public CinemachineCamera camFPS;
+
+    private CinemachinePanTilt fpsPanTilt;
 
     [Header("Player Components")]
     [SerializeField] private Transform player;
@@ -23,6 +26,7 @@ public class CameraSwitcher : MonoBehaviour
     {
         camFPS.Priority = 30;
         camTPS.Priority = 10;
+        fpsPanTilt = camFPS.GetComponent<CinemachinePanTilt>();
         SetTPSVisuals(false); // Démarrage en FPS
     }
 
@@ -40,11 +44,22 @@ public class CameraSwitcher : MonoBehaviour
 
         if (isFPS)
         {
-            // Réaligne le joueur correctement
-            AlignPlayerWithCamera(camFPS);
             
             camFPS.Priority = 30;
             camTPS.Priority = 10;
+            // Get direction from camera to target
+            Vector3 direction = player.forward;
+    
+            // Calculate pan (Y rotation) - horizontal angle
+            float pan = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+    
+            // Calculate tilt (X rotation) - vertical angle
+            float horizontalDistance = new Vector2(direction.x, direction.z).magnitude;
+            float tilt = -Mathf.Atan2(direction.y, horizontalDistance) * Mathf.Rad2Deg;
+            
+            fpsPanTilt.TiltAxis.Value = tilt;
+            fpsPanTilt.PanAxis.Value = pan;
+            fpsPanTilt.enabled = true;
 
             SetTPSVisuals(false);
 
@@ -57,6 +72,7 @@ public class CameraSwitcher : MonoBehaviour
         }
         else
         {
+            fpsPanTilt.enabled = false;
             camFPS.Priority = 10;
             camTPS.Priority = 30;
 
@@ -69,12 +85,6 @@ public class CameraSwitcher : MonoBehaviour
         }
     }
 
-    private void AlignPlayerWithCamera(CinemachineCamera camera)
-{
-    
-    if (player == null || camera == null) return;
-    camera.transform.forward = player.forward;
-}
 
     private IEnumerator ReturnToFPSAfterDelay()
     {

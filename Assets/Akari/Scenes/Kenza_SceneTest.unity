@@ -1118,6 +1118,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6471030328091287742}
     - target: {fileID: 5416202851194399422, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416202851194399422, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416202851194399422, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
@@ -1139,15 +1147,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5416202851194399422, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5416202851194399422, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5416202851194399422, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5416202851194399422, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1166,7 +1174,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6742682808221933473, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
+      propertyPath: RecenterTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742682808221933473, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
+      propertyPath: ReferenceFrame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742682808221933473, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
       propertyPath: TiltAxis.Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742682808221933473, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
+      propertyPath: PanAxis.Recentering.Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742682808221933473, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
+      propertyPath: TiltAxis.Recentering.Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8000021704120539503, guid: 05b4ac5e4b3ed5848948c0de952753d6, type: 3}
