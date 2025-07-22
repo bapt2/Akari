@@ -84,6 +84,7 @@ public class SimplePlayerMouvement : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            cameraPivot.forward = transform.forward;
         }
 
         controller.Move(move * currentSpeed * Time.deltaTime);

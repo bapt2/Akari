@@ -40,13 +40,14 @@ public class CameraSwitcher : MonoBehaviour
 
         if (isFPS)
         {
+            // Réaligne le joueur correctement
+            AlignPlayerWithCamera(camFPS);
+            
             camFPS.Priority = 30;
             camTPS.Priority = 10;
 
             SetTPSVisuals(false);
 
-            // Réaligne le joueur correctement
-            AlignPlayerWithCamera(camFPS);
 
             if (switchBackCoroutine != null)
             {
@@ -70,24 +71,9 @@ public class CameraSwitcher : MonoBehaviour
 
     private void AlignPlayerWithCamera(CinemachineCamera camera)
 {
+    
     if (player == null || camera == null) return;
-
-    Vector3 camForward = camera.transform.forward;
-    camForward.y = 0;
-
-    Debug.DrawRay(player.position, player.forward * 2, Color.blue, 2f); // Player forward
-    Debug.DrawRay(player.position, camForward * 2, Color.red, 2f); // Camera forward (sans y)
-
-    if (Vector3.Dot(player.forward, camForward) < 0f)
-    {
-        camForward = -camForward;
-    }
-
-    if (camForward.sqrMagnitude > 0.001f)
-    {
-        player.rotation = Quaternion.LookRotation(camForward);
-        Debug.Log($"Player rotation alignée sur caméra: {camForward}");
-    }
+    camera.transform.forward = player.forward;
 }
 
     private IEnumerator ReturnToFPSAfterDelay()
