@@ -9,7 +9,7 @@ public class CameraSwitcher : MonoBehaviour
     public CinemachineCamera camFPS;
 
     [Header("Player Components")]
-    [SerializeField] private Transform player; // Le joueur
+    [SerializeField] private Transform player; 
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
 
@@ -21,10 +21,14 @@ public class CameraSwitcher : MonoBehaviour
 
     void Start()
     {
+        // On démarre en FPS par défaut
         camFPS.Priority = 30;
         camTPS.Priority = 10;
 
-        SetTPSVisuals(false); // FPS par défaut
+        SetTPSVisuals(false);
+
+        // Aligne le joueur dès le départ pour éviter l'inversion
+        AlignPlayerWithCamera(camFPS);
     }
 
     void Update()
@@ -46,8 +50,7 @@ public class CameraSwitcher : MonoBehaviour
 
             SetTPSVisuals(false);
 
-            // Réaligne le joueur sur la direction de la caméra FPS
-            AlignPlayerWithCamera(camFPS);
+            AlignPlayerWithCamera(camFPS); // Aligne le joueur
 
             if (switchBackCoroutine != null)
             {
@@ -73,12 +76,15 @@ public class CameraSwitcher : MonoBehaviour
     {
         if (player == null || camera == null) return;
 
-        // On récupère la direction "forward" de la caméra
-        Vector3 lookDir = camera.transform.forward;
-        lookDir.y = 0; // On garde le joueur droit sur l'axe Y
+        // Utilise uniquement l'axe Y de la caméra (pas de pitch/roll)
+        Vector3 camForward = camera.transform.forward;
+        camForward.y = 0;
 
-        if (lookDir.sqrMagnitude > 0.001f)
-            player.rotation = Quaternion.LookRotation(lookDir);
+        if (camForward.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(camForward, Vector3.up);
+            player.rotation = targetRotation;
+        }
     }
 
     private IEnumerator ReturnToFPSAfterDelay()
