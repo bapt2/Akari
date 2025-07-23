@@ -5,6 +5,9 @@ public class GameManager : MonoBehaviour
 {
 
     public Animator animator;
+    [SerializeField] private AudioClip doorOpenClip;
+    
+
 
     public static GameManager instance;
 
@@ -21,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator OpenDoor(GameObject door, float lerpTime, float lerpValue, float speed, float startYDoor, BoxCollider colliderToDesactivate = null)
     {
+        AudioManager.instance.PlayClipAt(doorOpenClip, transform.position);
+
         if (colliderToDesactivate != null)
         {
             colliderToDesactivate.enabled = false;
@@ -28,7 +33,7 @@ public class GameManager : MonoBehaviour
 
         while (lerpTime < 1f)
         {
-            // faire monter la grille de la porte de manière fluide
+            // faire monter la grille de la porte de maniï¿½re fluide
             lerpTime += Time.deltaTime * speed;
             lerpTime = Mathf.Clamp01(lerpTime);
             lerpValue = Mathf.Lerp(startYDoor, 5.5f, lerpTime);

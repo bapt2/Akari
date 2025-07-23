@@ -9,6 +9,8 @@ public class InteractionSwitch : MonoBehaviour, IInteractable
     public float startYDoor;
     float lerpTime;
     float lerpValue;
+    [SerializeField] private AudioClip leverClip;
+
 
     public Vector3 newPosition;
     public GameObject door;
@@ -18,6 +20,8 @@ public class InteractionSwitch : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        AudioManager.instance.PlayClipAt(leverClip, transform.position);
+
         Debug.Log("Test de passage");
         if (!trueLever)
         {
@@ -36,7 +40,7 @@ public class InteractionSwitch : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        // pour tester la fonctionnalité plus facilement
+        // pour tester la fonctionnalitï¿½ plus facilement
         //if (Input.GetKeyDown(KeyCode.E) && door != null)
         //{
         //    StartCoroutine(OpenDoor());
