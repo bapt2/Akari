@@ -9,12 +9,14 @@ public class ObjectManipulor : MonoBehaviour
     public LayerMask interactableLayer;
 
     [Header("Scale Settings")]
-    public float scaleMultiplier = 1f;      // Taille à appliquer quand on grab en FPS
+    public float scaleMultiplier1;      // Taille à appliquer quand on grab en FPS
+    public float scaleMultiplier2;      
+    public float scaleMultiplier3;      
 
     private GameObject heldObject;
     private Rigidbody heldRb;
 
-    private Vector3 originalScale;          // Pour stocker l'échelle de base
+    public Vector3 originalScale;           // Pour stocker l'échelle de base
     private Vector3 grabbedScale;           // Échelle une fois doublée
     private bool hasBeenScaled = false;     // Empêche de redoubler la taille
 
@@ -51,7 +53,6 @@ public class ObjectManipulor : MonoBehaviour
         {
             heldObject = hit.collider.gameObject;
             heldRb = heldObject.GetComponent<Rigidbody>();
-
             if (heldRb != null)
             {
                 heldRb.useGravity = false;
@@ -61,8 +62,27 @@ public class ObjectManipulor : MonoBehaviour
                 if (cameraSwitcher != null && cameraSwitcher.IsFPS() && !hasBeenScaled)
                 {
                     originalScale = heldObject.transform.localScale;
-                    grabbedScale = originalScale * scaleMultiplier;
-                    heldObject.transform.localScale = grabbedScale;
+                    if (hit.distance <= 3 && hit.distance > 2.2)
+                    {
+                        Debug.Log($"distance: {hit.distance}, scale: {scaleMultiplier1}");
+
+                        grabbedScale = originalScale * scaleMultiplier1;
+                        heldObject.transform.localScale = grabbedScale;
+                    }
+                    else if (hit.distance <= 2.2 && hit.distance > 1.4)
+                    {
+                        Debug.Log($"distance: {hit.distance}, scale: {scaleMultiplier2}");
+
+                        grabbedScale = originalScale * scaleMultiplier2;
+                        heldObject.transform.localScale = grabbedScale;
+                    }
+                    else if (hit.distance <= 1.4 && hit.distance >= 0)
+                    {
+                        Debug.Log($"distance: {hit.distance}, scale: {scaleMultiplier3}");
+
+                        grabbedScale = originalScale * scaleMultiplier3;
+                        heldObject.transform.localScale = grabbedScale;
+                    }
                     hasBeenScaled = true;
                 }
             }
@@ -84,6 +104,7 @@ public class ObjectManipulor : MonoBehaviour
 
         heldObject = null;
         heldRb = null;
+        hasBeenScaled = false;
     }
 
     void Throw()
@@ -102,5 +123,6 @@ public class ObjectManipulor : MonoBehaviour
         heldObject.transform.SetParent(null);
         heldObject = null;
         heldRb = null;
+        hasBeenScaled = false;
     }
 }
