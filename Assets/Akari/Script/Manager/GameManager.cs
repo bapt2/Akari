@@ -5,8 +5,11 @@ public class GameManager : MonoBehaviour
 {
 
     public Animator animator;
-    [SerializeField] private AudioClip doorOpenClip;
-    
+  
+    [SerializeField] public AudioClip doorOpenClip;
+      
+   
+
 
 
     public static GameManager instance;
