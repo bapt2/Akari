@@ -9,10 +9,13 @@ EditorBuildSettings:
     path: Assets/Akari/Scenes/MainMenuScene.unity
     guid: 6b6801ad4c0d5b246b35eb655bf3c4c5
   - enabled: 1
-    path: Assets/Akari/Scenes/Kenza_SceneTest.unity
-    guid: 892a96041b69c954f8aeaf5f77d36200
-  - enabled: 1
     path: Assets/Akari/Scenes/Bapt_SceneTest.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Akari/Scenes/Outro.unity
+    guid: 7a0fcd61b7a67da4db8df54cb05d507d
+  - enabled: 0
+    path: Assets/Akari/Scenes/Kenza_SceneTest.unity
+    guid: 892a96041b69c954f8aeaf5f77d36200
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
