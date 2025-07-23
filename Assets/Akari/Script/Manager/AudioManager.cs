@@ -17,6 +17,9 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup nightMusicMixer;
     public DayNightCycle dayNightCycle;
 
+
+
+
     public static AudioManager instance;
 
     private void Awake()

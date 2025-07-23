@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SimplePlayerMouvement : MonoBehaviour
+public class SimplePlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
     private Animator animator;
@@ -9,16 +9,16 @@ public class SimplePlayerMouvement : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 10f;
     private float currentSpeed;
+    private Vector3 moveDirection;
 
     [Header("Jump")]
     [SerializeField] private float jumpHeight = 5.5f;
     [SerializeField] private float gravity = -9.81f;
     private Vector3 velocity;
-
-    private bool isGrounded;
-    private bool wasGroundedLastFrame = true;
     private int jumpCount = 0;
     [SerializeField] private int maxJump = 2;
+    private bool isGrounded;
+    private bool wasGroundedLastFrame = true;
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 10f;
@@ -37,58 +37,77 @@ public class SimplePlayerMouvement : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;
-        if (isGrounded) jumpCount = 0;
-
         if (isGrounded && !wasGroundedLastFrame)
-        {
             animator.SetBool("isJumping", false);
-        }
 
+        ReadInput();      // Lecture des touches
+        HandleRotation(); // Rotation TPS
+        HandleAnimation();// Animation de déplacement
+        HandleJumpInput();// Détection de saut
+
+        wasGroundedLastFrame = isGrounded;
+    }
+
+    void FixedUpdate()
+    {
+        ApplyMovement(); // Déplacement physique
+        ApplyGravity();  // Gravité
+    }
+
+    //  Lecture Input + Calcul direction
+    void ReadInput()
+    {
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
-
-        Vector3 move;
 
         if (cameraSwitcher != null && cameraSwitcher.IsFPS())
         {
             Vector3 forward = cameraPivot.forward;
             Vector3 right = cameraPivot.right;
 
-            forward.y = 0f;
-            right.y = 0f;
+            forward.y = 0;
+            right.y = 0;
 
-            // Normalisation + garde l'axe cohérent
-            move = (forward * moveZ + right * moveX);
-            if (move.magnitude > 1f) move.Normalize();
+            moveDirection = (forward * moveZ + right * moveX);
         }
         else
         {
-            move = new Vector3(moveX, 0, moveZ);
-            if (move.magnitude > 1f) move.Normalize();
+            moveDirection = new Vector3(moveX, 0f, moveZ);
         }
+
+        if (moveDirection.magnitude > 1f)
+            moveDirection.Normalize();
 
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
         currentSpeed = isSprinting ? runSpeed : walkSpeed;
+    }
 
-        float speedValue = move.magnitude * currentSpeed;
-
-        if (!cameraSwitcher.IsFPS())
+    //  Rotation du perso en TPS
+    void HandleRotation()
+    {
+        if (!cameraSwitcher.IsFPS() && moveDirection.magnitude > 0.1f)
         {
-            animator.SetBool("isMoving", move.magnitude > 0.1f);
-            animator.SetFloat("moveSpeed", speedValue);
-            animator.SetFloat("x", moveX);
-            animator.SetFloat("z", moveZ);
-        }
-
-        if (!cameraSwitcher.IsFPS() && move.magnitude > 0.1f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(move);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             cameraPivot.forward = transform.forward;
         }
+    }
 
-        controller.Move(move * currentSpeed * Time.deltaTime);
+    //  Animation selon les inputs
+    void HandleAnimation()
+    {
+        if (!cameraSwitcher.IsFPS())
+        {
+            animator.SetBool("isMoving", moveDirection.magnitude > 0.1f);
+            animator.SetFloat("moveSpeed", moveDirection.magnitude * currentSpeed);
+            animator.SetFloat("x", moveDirection.x);
+            animator.SetFloat("z", moveDirection.z);
+        }
+    }
 
+    //  Détection du saut (input uniquement)
+    void HandleJumpInput()
+    {
         if (Input.GetButtonDown("Jump") && jumpCount < maxJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -101,9 +120,20 @@ public class SimplePlayerMouvement : MonoBehaviour
             }
         }
 
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        if (isGrounded)
+            jumpCount = 0;
+    }
 
-        wasGroundedLastFrame = isGrounded;
+    //  Déplacement physique
+    void ApplyMovement()
+    {
+        controller.Move(moveDirection * currentSpeed * Time.fixedDeltaTime);
+    }
+
+    //  Gravité persistante
+    void ApplyGravity()
+    {
+        velocity.y += gravity * Time.fixedDeltaTime;
+        controller.Move(velocity * Time.fixedDeltaTime);
     }
 }
