@@ -1,22 +1,33 @@
 using UnityEngine;
+using System.Collections;
 
 public class TPSInteractionTrigger : MonoBehaviour, IInteractable
 {
     [SerializeField] private CameraSwitcher cameraSwitcher;
     [SerializeField] private Animator animator;
+    [SerializeField] private float delayBeforeSwitch = 1.5f; // Durée animation
 
     public void Interact()
     {
-        if (cameraSwitcher != null)
+        if (animator != null)
         {
-            cameraSwitcher.SwitchCamera();
-            Debug.Log("Caméra changée via interaction !");
+            animator.SetTrigger("interact");
+            StartCoroutine(SwitchCameraAfterAnimation());
         }
-
-        if (animator!= null)
+        else
         {
-            animator.SetTrigger("Interact");
+            Debug.LogWarning("Animator non assigné !");
         }
     }
 
+    private IEnumerator SwitchCameraAfterAnimation()
+    {
+        yield return new WaitForSeconds(delayBeforeSwitch);
+
+        if (cameraSwitcher != null)
+        {
+            cameraSwitcher.SwitchCamera();
+            Debug.Log("Caméra changée après l'animation !");
+        }
+    }
 }

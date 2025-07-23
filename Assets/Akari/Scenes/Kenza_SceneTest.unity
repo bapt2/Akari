@@ -772,7 +772,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSwitcher: {fileID: 6471030328091287742}
-  animator: {fileID: 0}
+  animator: {fileID: 6471030328091287746}
+  delayBeforeSwitch: 1.5
 --- !u!1 &1576122189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1391,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17650a70715c5d9409e7bb07ffbce4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &6471030328091287746 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9067549632330580715, guid: fcfaf3c2ef051ab41b3c283a945cbb71, type: 3}
+  m_PrefabInstance: {fileID: 3788226710193476380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
