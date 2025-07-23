@@ -7,7 +7,7 @@ public class RenderInTPS : MonoBehaviour
     public GameObject[] gameObjectsToChangeLayer;
 
     public LayerMask visibleInTPS;
-    public LayerMask defaultLayer;
+    public LayerMask InvisibleInFPS;
 
     public CameraSwitcher cameraSwitcher;
 
@@ -16,13 +16,13 @@ public class RenderInTPS : MonoBehaviour
         if (cameraSwitcher.isFPS && !hasChange)
         {
             hasChange = true;
-            SwitchLayer.instance.ChangeLayers(gameObjectsToChangeLayer, visibleInTPS);
+            SwitchLayer.instance.ChangeLayers(gameObjectsToChangeLayer, InvisibleInFPS);
         } 
         else if (!cameraSwitcher.isFPS && hasChange) 
         {
 
             hasChange = false;
-            SwitchLayer.instance.ChangeLayers(gameObjectsToChangeLayer, defaultLayer);
+            SwitchLayer.instance.ChangeLayers(gameObjectsToChangeLayer, visibleInTPS);
         }
     }
 

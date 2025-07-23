@@ -87,7 +87,6 @@ public class DayNightCycle : MonoBehaviour
             speedTime += Time.deltaTime * sensitivity;
             speedTime = Mathf.Clamp01(speedTime);
             speedTime = Mathf.SmoothStep(0f, 1f, speedTime);
-            Debug.Log($"skybox: {skybox.name}");
             RenderSettings.skybox.Lerp(RenderSettings.skybox, skybox, speedTime);
             RenderSettings.sun = light;
             RenderSettings.ambientIntensity = Mathf.Lerp(RenderSettings.ambientIntensity, intensityMultiplier, speedTime);
