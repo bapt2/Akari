@@ -5970,6 +5970,7 @@ MonoBehaviour:
   trueLever: 1
   speed: 0.75
   startYDoor: 2.75
+  leverClip: {fileID: 0}
   newPosition: {x: 0, y: 0, z: 0}
   door: {fileID: 415051687}
   objectToDesactivate: {fileID: 434638891}
@@ -8132,6 +8133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2751374}
+  doorOpenClip: {fileID: 0}
 --- !u!4 &474838988
 Transform:
   m_ObjectHideFlags: 0
@@ -10412,6 +10414,7 @@ MonoBehaviour:
   trueLever: 0
   speed: 0
   startYDoor: 0
+  leverClip: {fileID: 0}
   newPosition: {x: 45.8, y: 6.59, z: 0}
   door: {fileID: 0}
   objectToDesactivate: {fileID: 0}
@@ -19435,6 +19438,7 @@ MonoBehaviour:
   trueLever: 0
   speed: 0
   startYDoor: 0
+  leverClip: {fileID: 0}
   newPosition: {x: 45.8, y: 6.59, z: 0}
   door: {fileID: 0}
   objectToDesactivate: {fileID: 0}
