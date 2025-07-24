@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator OpenDoor(GameObject door, float lerpTime, float lerpValue, float speed, float startYDoor, BoxCollider colliderToDesactivate = null)
     {
-        AudioManager.instance.PlayClipAt(doorOpenClip, transform.position);
+        AudioManager.instance.PlayClipAt(doorOpenClip, door.transform.position);
 
         if (colliderToDesactivate != null)
         {
@@ -43,5 +43,6 @@ public class GameManager : MonoBehaviour
             door.transform.localPosition = new Vector3(-1.5f, lerpValue, 0f);
             yield return null;
         }
+        door.SetActive(false);
     }
 }
