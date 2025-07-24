@@ -13,6 +13,7 @@ public class AppearInTPSAndUnlockedInFPS : MonoBehaviour
     public Material onTPSMaterial;
 
     private MeshRenderer[] meshRenderers;
+    public Vector3 basePosition;
 
 
     void Start()
@@ -50,7 +51,6 @@ public class AppearInTPSAndUnlockedInFPS : MonoBehaviour
                     mr.enabled = true;
                     mr.material = onTPSMaterial;
                 }
-                changeAppliedFPS = false;
             }
         }
     }
@@ -68,7 +68,16 @@ public class AppearInTPSAndUnlockedInFPS : MonoBehaviour
             changeAppliedTPS = true;
             yield return new WaitForSecondsRealtime(15f);
             changeAppliedTPS = false;
+            unlocked = true;
+            changeAppliedFPS = false;
+
             yield break;
         }
+    }
+
+    public IEnumerator ReplaceObject()
+    {
+        yield return new WaitForSecondsRealtime(10f);
+        transform.position = basePosition;
     }
 }

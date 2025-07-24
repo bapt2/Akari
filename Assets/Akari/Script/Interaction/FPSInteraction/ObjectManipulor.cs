@@ -20,6 +20,8 @@ public class ObjectManipulor : MonoBehaviour
     private Vector3 grabbedScale;           // Échelle une fois doublée
     private bool hasBeenScaled = false;     // Empêche de redoubler la taille
 
+    public AppearInTPSAndUnlockedInFPS enableReplacement;
+
     void Update()
     {
         // Clic droit pour grab/drop
@@ -111,7 +113,8 @@ public class ObjectManipulor : MonoBehaviour
     {
         Camera activeCamera = Camera.main;
         Vector3 throwDirection = activeCamera.transform.forward;
-
+        enableReplacement = heldObject.gameObject.GetComponent<AppearInTPSAndUnlockedInFPS>();
+        StartCoroutine(enableReplacement.ReplaceObject());
         // Toujours garder la scale après le lancer
         if (heldObject != null)
             heldObject.transform.localScale = hasBeenScaled ? grabbedScale : originalScale;
