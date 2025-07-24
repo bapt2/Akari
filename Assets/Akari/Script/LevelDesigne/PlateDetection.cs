@@ -30,6 +30,7 @@ public class PlateDetection : MonoBehaviour
         else if (collision.collider.CompareTag("GrowingObject") && !needSize)
         {
             StartCoroutine(GameManager.instance.OpenDoor(door, lerpTime, lerpValue, speed, startYDoor));
+            ChangeTPSCameraPos();
         }
     }
 

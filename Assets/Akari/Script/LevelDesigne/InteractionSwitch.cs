@@ -26,7 +26,7 @@ public class InteractionSwitch : MonoBehaviour, IInteractable
         if (!trueLever)
         {
             CharacterController playerControler = player.gameObject.GetComponentInChildren<CharacterController>();
-
+            Debug.Log("test");
             playerControler.enabled = false;
             player.transform.position = newPosition;
             playerControler.enabled = true;

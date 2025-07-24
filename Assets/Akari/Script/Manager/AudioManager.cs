@@ -78,7 +78,7 @@ public class AudioManager : MonoBehaviour
         _audioSource.clip = clip;
         _audioSource.outputAudioMixerGroup = soundEffectMixer;
         _audioSource.Play();
-        Destroy(_audioSource, clip.length);
+        Destroy(tempGO, clip.length);
         return _audioSource;
     }
 }

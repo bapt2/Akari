@@ -35,6 +35,10 @@ public class CameraSwitcher : MonoBehaviour
         {
             SwitchCamera();
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            InitializeFPSCamera();
+        }
     }
 
     public void SwitchCamera()
