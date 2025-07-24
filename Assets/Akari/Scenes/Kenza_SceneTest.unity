@@ -415,6 +415,7 @@ MonoBehaviour:
   changeAppliedTPS: 0
   onFPSMaterial: {fileID: 0}
   onTPSMaterial: {fileID: 0}
+  basePosition: {x: 0, y: 0, z: 0}
 --- !u!1 &585468651
 GameObject:
   m_ObjectHideFlags: 0
