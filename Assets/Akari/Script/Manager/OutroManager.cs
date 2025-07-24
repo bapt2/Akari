@@ -29,6 +29,8 @@ public class OutroManager: MonoBehaviour
     void OnVideoFinished(VideoPlayer vp)
     {
         // Afficher les boutons une fois la vid�o termin�e
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         restartButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
     }
