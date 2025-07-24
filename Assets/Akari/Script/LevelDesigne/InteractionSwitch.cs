@@ -22,11 +22,9 @@ public class InteractionSwitch : MonoBehaviour, IInteractable
     {
         AudioManager.instance.PlayClipAt(leverClip, transform.position);
 
-        Debug.Log("Test de passage");
         if (!trueLever)
         {
             CharacterController playerControler = player.gameObject.GetComponentInChildren<CharacterController>();
-            Debug.Log("test");
             playerControler.enabled = false;
             player.transform.position = newPosition;
             playerControler.enabled = true;

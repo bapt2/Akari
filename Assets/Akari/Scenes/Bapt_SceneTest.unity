@@ -11821,7 +11821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de64b92726882534498c6ee848f462d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationTime: 0
+  animationTime: 4
   isInRange: 0
   cameraSwitcher: {fileID: 2023601990}
 --- !u!54 &692363545

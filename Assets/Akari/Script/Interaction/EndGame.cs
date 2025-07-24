@@ -32,7 +32,7 @@ public class EndGame : MonoBehaviour, IInteractable
     IEnumerator StartEndGame(float _animationTime)
     {
         cameraSwitcher.SwitchCamera();
-        //déclancher ici l'animation du joueur et une fois fini lancer la fin du jeu
+        playerAnimator.SetTrigger("sitAndLay");
         yield return new WaitForSecondsRealtime(_animationTime);
         GameManager.instance.animator.SetTrigger("FadeIn");
         yield return new WaitForSecondsRealtime(2f);

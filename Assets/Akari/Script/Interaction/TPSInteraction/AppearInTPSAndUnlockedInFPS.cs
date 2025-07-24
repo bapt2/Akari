@@ -33,7 +33,6 @@ public class AppearInTPSAndUnlockedInFPS : MonoBehaviour
             if (!changeAppliedFPS)
             {
                 StartCoroutine(ChangeCoolDown(isFPS));
-                Debug.Log("test");
                 foreach (var mr in meshRenderers)
                 {
                     mr.enabled = unlocked;
